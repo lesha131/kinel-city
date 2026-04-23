@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Кинель — сердце Самарской области</title>
+    <!-- Google Fonts для современного шрифта -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafb;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Шапка */
+        .header {
+            background: linear-gradient(135deg, #0f3b2c 0%, #1c6e4a 100%);
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .header .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Навигация */
+        .nav {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            padding: 16px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 600;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #1c6e4a;
+            border-bottom-color: #1c6e4a;
+        }
+
+        /* Секции */
+        .section {
+            padding: 64px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            text-align: center;
+            color: #0f3b2c;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #e6b422;
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        /* Карточки достопримечательностей */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .place-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .place-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            background-color: #d1d5db;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #2d6a4f;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card-content p {
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* Список плюсов (преимущества) */
+        .pros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .pros-item {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 10px 15px -10px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .pros-item i {
+            font-size: 2.5rem;
+            color: #e6b422;
+            margin-bottom: 16px;
+        }
+
+        .pros-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .pros-item p {
+            color: #475569;
+        }
+
+        /* Инфо — два блока (история + факты) */
+        .info-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        .info-card {
+            flex: 1;
+            background: white;
+            padding: 32px;
+            border-radius: 32px;
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
+        }
+
+        .info-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #0f3b2c;
+        }
+
+        .info-card p, .info-card li {
+            color: #334155;
+        }
+
+        .facts-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+
+        .facts-list li {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .facts-list li i {
+            color: #1c6e4a;
+            width: 24px;
+        }
+
+        /* Подвал */
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 40px 20px;
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #e6b422;
+            text-decoration: none;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
+            .nav-links {
+                gap: 20px;
+            }
+            .info-flex {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h1>🇷🇺 Кинель</h1>
+        <p class="tagline">Город железнодорожников, хлебной нивы и душевных традиций</p>
+        <p style="margin-top: 16px; font-size: 1rem;"><i class="fas fa-map-marker-alt"></i> Самарская область · сердце транспортных маршрутов</p>
+    </div>
+</header>
+
+<nav class="nav">
+    <div class="container nav-links">
+        <a href="#info">О городе</a>
+        <a href="#sights">Достопримечательности</a>
+        <a href="#pros">Плюсы города</a>
+    </div>
+</nav>
+
+<main>
+    <!-- Раздел: Информация о городе -->
+    <section id="info" class="section">
+        <div class="container">
+            <h2 class="section-title">Город с характером</h2>
+            <div class="info-flex">
+                <div class="info-card">
+                    <h3><i class="fas fa-landmark"></i> Историческая справка</h3>
+                    <p>Кинель основан в 1837 году как посёлок при строительстве почтового тракта. Статус города получил в 1944 году. 
+                    Благодаря выгодному расположению на пересечении железнодорожных магистралей (Транссиб и линия на Оренбург) Кинель стал важным транспортным узлом. 
+                    В годы Великой Отечественной здесь формировались эшелоны, шла эвакуация заводов.</p>
+                    <p style="margin-top: 12px;">Сегодня Кинель — динамично развивающийся центр сельского хозяйства, переработки зерна и логистики. 
+                    Город славится гостеприимством, уютными парками и богатой историей.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-chart-line"></i> Кинель сегодня</h3>
+                    <ul class="facts-list">
+                        <li><i class="fas fa-users"></i> Население: ~34 000 человек</li>
+                        <li><i class="fas fa-train"></i> Крупная железнодорожная станция Куйбышевской магистрали</li>
+                        <li><i class="fas fa-wheat-alt"></i> Ведущий производитель муки и круп в регионе</li>
+                        <li><i class="fas fa-tree"></i> Более 10 парков и скверов</li>
+                        <li><i class="fas fa-school"></i> 8 школ, колледж транспорта, филиалы вузов</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел: Достопримечательности -->
+    <section id="sights" class="section" style="background: #f1f5f9;">
+        <div class="container">
+            <h2 class="section-title">Что посмотреть в Кинеле</h2>
+            <div class="cards-grid">
+                <!-- Карточка 1 -->
+                <div class="place-card">
+                    <div class="card-img">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Свято-Троицкий собор</h3>
+                        <p>Красивейший храм с голубыми куполами, построенный в неорусском стиле. Центр духовной жизни города, 
+                        место тишины и архитектурной гармонии.</p>
+                    </div>
+                </div>
+                <!-- Карточка 2 -->
+                <div class="place-card">
+                    <div class="card-img">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Паровоз-памятник Л-2342</h3>
+                        <p>Легендарный паровоз серии "Л" установлен у железнодорожного вокзала в честь трудовых подвигов машинистов. 
+                        Любимое место для фото и дань уважения железнодорожной истории.</p>
+                    </div>
+                </div>
+                <!-- Карточка 3 -->
+                <div class="place-card">
+                    <div class="card-img">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Парк Победы</h3>
+                        <p>Зелёная зона с фонтанами, мемориалом Вечный огонь и Аллеей Славы. Идеально для прогулок, 
+                        здесь проходят городские праздники и спортивные мероприятия.</p>
+                    </div>
+                </div>
+                <!-- Карточка 4 -->
+                <div class="place-card">
+                    <div class="card-img">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>ДК "Восход"</h3>
+                        <p>Центр культурной жизни, где проходят концерты, выставки и театральные постановки. Здание — пример советского неоклассицизма.</p>
+                    </div>
+                </div>
+                <!-- Карточка 5 -->
+                <div class="place-card">
+                    <div class="card-img">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Купеческие дома (ул. Ленина)</h3>
+                        <p>Историческая застройка конца XIX — начала XX века. Деревянные и каменные особняки с резными наличниками — живое наследие.</p>
+                    </div>
+                </div>
+                <!-- Карточка 6 -->
+                <div class="place-card">
+                    <div class="card-img">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Сквер "Семейный"</h3>
+                        <p>Уютное место с детскими площадками, арт-объектами и ротондой. Популярное место для выгула собак и вечерних прогулок.</p>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-style: italic; color: #475569;">
+                <i class="fas fa-camera"></i> И это лишь малая часть — Кинель ждёт вас!
+            </p>
+        </div>
+    </section>
+
+    <!-- Раздел: Плюсы города -->
+    <section id="pros" class="section">
+        <div class="container">
+            <h2 class="section-title">Почему Кинель — это плюс</h2>
+            <div class="pros-grid">
+                <div class="pros-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Экология и природа</h4>
+                    <p>Чистый воздух, город утопает в зелени, река Большой Кинель добавляет свежести.</p>
+                </div>
+                <div class="pros-item">
+                    <i class="fas fa-route"></i>
+                    <h4>Транспортный узел</h4>
+                    <p>Ж/д станция, трассы М5 и А300 — до Самары 40 минут, до аэропорта Курумоч — быстро.</p>
+                </div>
+                <div class="pros-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Низкая стоимость жизни</h4>
+                    <p>Цены на жильё и услуги заметно ниже областного центра, при этом вся инфраструктура рядом.</p>
+                </div>
+                <div class="pros-item">
+                    <i class="fas fa-bread-slice"></i>
+                    <h4>Своя продукция</h4>
+                    <p>Знаменитый кинельский хлеб, мясо, молочка — фермерские товары на любой вкус.</p>
+                </div>
+                <div class="pros-item">
+                    <i class="fas fa-futbol"></i>
+                    <h4>Спорт и досуг</h4>
+                    <p>Ледовый дворец, ФОКи, лыжная трасса, ежегодный велопробег и фестиваль ухи.</p>
+                </div>
+                <div class="pros-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Добрососедство</h4>
+                    <p>Небольшой город, где все друг друга знают, спокойно и безопасно для семей с детьми.</p>
+                </div>
+            </div>
+            <!-- Дополнительный блок о плюсах в цифрах -->
+            <div style="background: #e9f5ef; border-radius: 28px; margin-top: 48px; padding: 28px 24px; text-align: center;">
+                <i class="fas fa-smile-wink" style="font-size: 2rem; color:#1c6e4a;"></i>
+                <p style="margin-top: 12px; font-size: 1.1rem;"><strong>И ещё один важный плюс:</strong> Кинель — город, где развивается молодёжное движение, благоустраиваются дворы и реализуются проекты комфортной городской среды. Здесь можно найти работу в АПК, логистике или открыть своё дело при поддержке малого бизнеса.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p><i class="fas fa-heart" style="color: #e6b422;"></i> Город Кинель — больше, чем остановка на пути</p>
+        <p style="margin-top: 12px;">Проект-презентация для GitHub | Актуально на 2025 год</p>
+        <p style="margin-top: 12px; font-size: 0.85rem;">Все материалы основаны на открытых источниках и любви к малой родине.</p>
+        <p style="margin-top: 16px;">
+            <a href="#"><i class="fab fa-github"></i> GitHub репозиторий</a> 
+            &nbsp;|&nbsp; 
+            <a href="#"> <i class="fas fa-map-marked-alt"></i> Посмотреть на карте</a>
+        </p>
+    </div>
+</footer>
+</body>
+</html>
